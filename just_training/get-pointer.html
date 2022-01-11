@@ -52,10 +52,12 @@
         let box = document.querySelector('.on');
         let get_pointer = document.querySelector('.pointer_val');
 
-        box.addEventListener("click", (e) => {
+        // getBoundingClientRect 함수 사용해서 값을 가져오기
+        box.addEventListener("click", () => {
             console.log(box.getBoundingClientRect());
         });
-        document.addEventListener("click", function(e){
+
+        document.addEventListener("click", (e) => {
             get_pointer.innerHTML = `
             pageX : ${e.pageX},  pageY : ${e.pageY} </br>
             clientX : ${e.clientX},  clientY :${e.clientY}`;
