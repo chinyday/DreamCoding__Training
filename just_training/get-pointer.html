@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>get pointer</title>
+    <style>
+        p{    
+            width: 100px;
+            height: 100px;
+            background: bisque;
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid;
+        }
+        p.on{
+            background: blueviolet;
+        }
+        .container{
+            position: relative;
+        }
+        .container .fixed__box{
+            position: fixed; 
+            left: 300px;
+            top: 44px;
+            padding: 10px;
+            background: beige;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span>좌표값 가져오기 (pageX, clientX의 차이점)</span>
+        <div class="fixed__box">
+            <span class="pointer_val"></span>
+        </div>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p class="on"></p>
+        <p></p>
+        <p></p>
+    </div>
+    <script>
+
+        let box = document.querySelector('.on');
+        let get_pointer = document.querySelector('.pointer_val');
+
+        box.addEventListener("click", (e) => {
+            console.log(box.getBoundingClientRect());
+        });
+        document.addEventListener("click", function(e){
+            get_pointer.innerHTML = `
+            pageX : ${e.pageX},  pageY : ${e.pageY} </br>
+            clientX : ${e.clientX},  clientY :${e.clientY}`;
+        });
+    </script>
+</body>
+</html>
