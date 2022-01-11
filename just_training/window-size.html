@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>window size</title>
+    <style>
+        .info__box{display: inline-block; padding: 5px 20px; background: antiquewhite;}
+    </style>
+</head>
+<body>
+
+    <div class="info__box">
+        <p>윈도우 사이즈 표기하기</p>
+        <div class="val__box"></div>
+    </div>
+
+    <script>
+        // window.addEventListener("resize", function(e){
+        //     document.querySelector(".window_screen_val").innerText = `${window.screen.width}, ${window.screen.height}`;
+        //     document.querySelector(".window_outer_val").innerText = `${window.outerWidth}, ${window.outerHeight}`;
+        //     document.querySelector(".window_inner_val").innerText = `${window.innerWidth}, ${window.innerHeight}`;
+        //     document.querySelector(".window_clientWidth_val").innerText = `${document.documentElement.clientWidth}, ${document.documentElement.clientHeight}`;
+        // });
+
+        let get_val = document.querySelector('.val__box');
+
+        function UpdateTag(){
+            get_val.innerHTML = `
+                window.screen : ${window.screen.width}, ${window.screen.height}</br>
+                window.outer : ${window.outerWidth}, ${window.outerHeight}</br>
+                window.inner : ${window.innerWidth}, ${window.innerHeight}</br>
+                documentElement.clientWidth : ${document.documentElement.clientWidth}, ${document.documentElement.clientHeight}
+            `;
+        }
+       
+        window.addEventListener("resize", () => { UpdateTag(); });
+        UpdateTag();
+    </script>
+</body>
+</html>
