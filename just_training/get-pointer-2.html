@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>get pointer</title>
+    <style>
+        p{    
+            width: 100px;
+            height: 100px;
+            background: bisque;
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid;
+        }
+        p.on{
+            background: blueviolet;
+        }
+        .container{
+            position: relative;
+        }
+        .container .move-box{
+            position: fixed; 
+            left: 300px;
+            top: 44px;
+            padding: 10px;
+            /* background: beige; */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span>버튼으로 이동하기</span>
+        <div class="move-box">
+            <button class="move-btn__by">scroll by 100px</button>
+            <button class="move-btn__to">top to 100px</button>
+            <button class="move-btn__tobox">move to the box</button>
+        </div>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p class="on"></p>
+        <p></p>
+        <p></p>
+    </div>
+    <script>
+
+        let moveBy = document.querySelector('.move-btn__by');
+        let moveTo = document.querySelector('.move-btn__to');
+        let moveTobox = document.querySelector('.move-btn__tobox');
+        let box = document.querySelector('.on');
+   
+        moveBy.addEventListener("click", () => {
+            window.scrollBy({
+                top: 100,
+                left: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        moveTo.addEventListener("click", () => {
+            window.scrollTo({
+                top: 100,
+                left: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        moveTobox.addEventListener("click", () => {
+            box.scrollIntoView();
+        });
+    </script>
+</body>
+</html>
