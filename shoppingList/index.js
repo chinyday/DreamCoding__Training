@@ -43,7 +43,7 @@ add_btn.addEventListener("click", () => {
     addItem();
 });
 
-window.addEventListener("keydown", (e) => {
+window.addEventListener("keyup", (e) => {
     if(e.key =="Enter"){
         addItem();
     }
