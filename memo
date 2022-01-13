@@ -6,6 +6,28 @@ Operaion (layout, paint, compositon)
 # 참고하면 좋은 css 사이트 
 http://csstriggers.com/
 
-#CSS Gradient
+# CSS Gradient
 https://cssgradient.io/
 https://color.adobe.com/ko/create/color-wheel
+
+
+# Bubbling and Capturing 
+https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#Event_bubbling_and_capture
+
+click을 하게 되면 브라우저는 Capturing을 통해서 부모에서부터 들어가 있는 버튼에 등록되어 있는 이벤트 핸들러를 호출하게 된다.
+Bubbling up을 통해서 상위에 등록되어 있는 (부모) 이벤트 핸들러를 호출하게 된다.
+
+* 버블링을 막는 방법
+Event.stopPropagation() : 위로 전달하는 것을 방지하는 것 (클릭한 곳에서만 발생하도록)
+Event.stopImmediatePropagation() : 함께 등록되어 있는 이벤트 핸들러도 무시하는 것 (나를 제외하고는 모두 무시) 하지만, 이벤트 등록되어 있는 순서에 따라서 이전에 등록된 이벤트는 실행된다.
+
+=> 하지만 위의 취소 방식은 옳지 않음, (만약에 해당 클릭 이벤트를 들어야 하는 경우가 있는데 그 부분까지 무시하면 안되기 때문에)
+e.currentTarget와 e.targer의 동일 유무를 확인하여 return 하는 방식으로 처리하는 것이 올바르다.
+
+* 기타
+Event.preventDefault() : 브라우저의 행동을 무시(막아버리는) 것
+
+
+# 이벤트 위임(delegation)
+부모 element는 자식의 element의 모든 이벤트를 다 들을 수 있기 때문에, 위임을 사용하는 것이 효율적이다.
+https://ui.toast.com/weekly-pick/ko_20160826
