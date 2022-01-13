@@ -1,6 +1,7 @@
 let add_btn = document.querySelector('.footer__btn');
 let input_txt = document.querySelector('.footer__input')
 let ul = document.querySelector(".items");
+let form = document.querySelector(".footer__form");
 
 let id_num = 0; 
 //item__row를 그려주는 함수
@@ -13,8 +14,7 @@ function paintItem(txt) {
             <span class="item__name">${txt}</span>
             <button class="item__del"><i class="fas fa-trash-alt" data-id="${id_num}"></i></button>
         </div>
-        <div class="item__divider"></div>
-    `;
+        <div class="item__divider"></div>`;
     id_num++;
     return li;
 }
@@ -39,12 +39,7 @@ ul.addEventListener("click", (e) => {
     }
 });
 
-add_btn.addEventListener("click", () => {
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
     addItem();
-});
-
-window.addEventListener("keyup", (e) => {
-    if(e.key =="Enter"){
-        addItem();
-    }
 });
