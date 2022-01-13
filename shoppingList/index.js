@@ -2,31 +2,20 @@ let add_btn = document.querySelector('.footer__btn');
 let input_txt = document.querySelector('.footer__input')
 let ul = document.querySelector(".items");
 
+let id_num = 0; 
 //item__row를 그려주는 함수
 function paintItem(txt) {
     let li = document.createElement("li");
     li.setAttribute("class", "item__row");
-    
-    let div = document.createElement("div");
-    div.setAttribute("class", "item");
-    
-    let span = document.createElement("span");
-    span.innerHTML = txt;
-    span.setAttribute("class", "item__name");
-
-    let btn = document.createElement("button");
-    btn.setAttribute("class", "item__del");
-    btn.innerHTML = `<i class="fas fa-trash-alt"></i>`;
-    btn.addEventListener("click", deleteItem);
-   
-    let divier = document.createElement("div");
-    divier.setAttribute("class", "item__divider");
-
-    div.appendChild(span);
-    div.appendChild(btn);
-    li.appendChild(div);
-    li.appendChild(divier);
-    
+    li.setAttribute("data-id", id_num);
+    li.innerHTML = `
+        <div class="item">
+            <span class="item__name">${txt}</span>
+            <button class="item__del"><i class="fas fa-trash-alt" data-id="${id_num}"></i></button>
+        </div>
+        <div class="item__divider"></div>
+    `;
+    id_num++;
     return li;
 }
 
@@ -46,6 +35,13 @@ function addItem() {
 function deleteItem(e) {   
     e.currentTarget.parentElement.parentElement.remove();
 }
+
+ul.addEventListener("click", (e) => {
+    let id = e.target.dataset.id;
+    if(id){
+        document.querySelector(`.item__row[data-id="${id}"]`).remove();
+    }
+});
 
 add_btn.addEventListener("click", () => {
     addItem();
