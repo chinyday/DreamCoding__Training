@@ -31,11 +31,7 @@ function addItem() {
     input_txt.focus();
 }
 
-//삭제 함수
-function deleteItem(e) {   
-    e.currentTarget.parentElement.parentElement.remove();
-}
-
+//삭제
 ul.addEventListener("click", (e) => {
     let id = e.target.dataset.id;
     if(id){
@@ -47,7 +43,7 @@ add_btn.addEventListener("click", () => {
     addItem();
 });
 
-window.addEventListener("keypress", (e) => {
+window.addEventListener("keydown", (e) => {
     if(e.key =="Enter"){
         addItem();
     }
