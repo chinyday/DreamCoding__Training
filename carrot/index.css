@@ -6,7 +6,9 @@
     border-radius: 5px;
     cursor: pointer;
 }
-
+.play-btn:hover{
+    transform: scale(1.1);
+}
 .board{
     height: 500px;
     width: 800px;
@@ -51,7 +53,13 @@
     width: 100%;
     margin-top: 110px;
     height: calc(100% - 162px - 110px);
+    position: relative;
 }
+.playground .icon{
+    position: absolute;
+    cursor: pointer;
+}
+
 .alert{
     position: absolute;
     z-index: 9999;
