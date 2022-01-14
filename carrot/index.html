@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>당근 찾기 게임</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <script src="index.js" defer></script>
+</head>
+<body>
+   <div class="board">
+        <section class="play-notice">
+            <button class="play-notice__button play-btn">
+                <i class="fas fa-play"></i>
+                <i class="fas fa-stop play-notice__button--none"></i>
+            </button>
+            <div class="play-notice__timer">0:0</div>
+            <div class="play-notice__count">10</div>
+        </section>
+        <section class="playground"></section>
+        <section class="alert alert--none">
+            <div class="alert-box">
+                <button class="alert__button play-btn">
+                    <i class="fas fa-redo"></i>
+                </button>
+                <div class="alert__text">YOU WIN!!</div>
+                <div class="alert__text">YOU ROST!!</div>
+                <div class="alert__text">REPLAY??</div>
+            </div>
+        </section>
+   </div> 
+</body>
+</html>
