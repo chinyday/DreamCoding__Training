@@ -18,12 +18,10 @@
     border-radius: 5px;
     position: relative;
 }
+
 .play-notice{
     padding-top: 20px;
     text-align: center;
-}
-.play-notice__button i.play-notice__button--none{
-    display: none;
 }
 .play-notice__timer{
     width: 100px;
@@ -58,6 +56,9 @@
 .playground .icon{
     position: absolute;
     cursor: pointer;
+}
+.playground .icon:hover{
+    transform: scale(1.1);
 }
 
 .alert{
