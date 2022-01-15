@@ -20,10 +20,9 @@ function init() {
     counter.innerHTML = IMG_COUNT;
     playground.innerHTML = '';
     alert.classList.add('alert--none');  
-
     addItems('carrot', IMG_COUNT, 'img/carrot.png');// 당근 추가
     addItems('bug', IMG_COUNT, 'img/bug.png');// 벌레 추가
-    
+    clearInterval(interval);
     interval = setInterval(() => {setTimer();}, 1000);
 }
 
@@ -93,10 +92,12 @@ function setTimer() {
 }
 
 alert_btn.addEventListener('click', (e) => {
-    // let stop = play_btn.querySelector('.fa-stop');
-    // stop.classList.add('fa-play');
-    // stop.classList.remove('fa-stop');
     clearInterval(interval);
+
+    let stop = play_btn.querySelector('.fas'); 
+    stop.classList.remove('fa-stop');
+    stop.classList.add('fa-play');
+
     init();
 }) 
 
@@ -109,6 +110,7 @@ play_btn.addEventListener('click', (e) => {
         play.classList.add('fa-stop');
         init();
     }else if(stop){
+        clearInterval(interval);
         displayPopUp('REPLAY??');
     }
 
