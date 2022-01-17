@@ -2,7 +2,7 @@
 
 const IMG_SIZE = 80;
 const IMG_COUNT = 5;
-let GAME_TIME = 5;
+const GAME_TIME = 10;
 let score = 0;
 
 let playground = document.querySelector('.playground');
@@ -15,10 +15,94 @@ let alert_txt = document.querySelector('.alert__text');
 let alert_btn = document.querySelector('.alert__button');
 
 let interval = null;
-let checked = false;
+let started = false;
+
+const bgaudio = new Audio("./sound/bg.mp3");   
+const alertSound = new Audio("./sound/alert.wav"); 
+const winSound = new Audio("./sound/game_win.mp3"); 
+const carrotSound = new Audio("./sound/carrot_pull.mp3"); 
+const bugSound = new Audio("./sound/bug_pull.mp3"); 
+
+play_btn.addEventListener('click', () => { 
+    if(started){
+        stopGame();
+    }else{ 
+        startGame();
+    }  
+});
+
+playground.addEventListener('click', (e) => {
+    let class_name = e.target.className;
+
+    if(class_name == "playground"){
+        return;
+    }
+
+    if(class_name.includes('carrot')){
+        startSound(carrotSound);
+        e.target.remove();
+        score++;
+        getCounter(score);
+    }else if(class_name.includes('bug')){
+        startSound(bugSound);
+        clearInterval(interval);   
+        finishGame(false);
+    }
+});
+
+alert_btn.addEventListener('click', (e) => {
+    clearInterval(interval);   
+    showPlayButton();
+    startGame();
+});
+
+function startGame() {
+    started = true;
+    clearInterval(interval);   
+    showStopButton();
+    startSound(bgaudio);
+
+    let remainTime = GAME_TIME;
+    interval = setInterval(() => {
+        if(remainTime <= 0){
+            clearInterval(interval);   
+            startSound(bugSound);
+            finishGame();
+            return;
+        }
+        setTimerTxt(--remainTime);
+    }, 1000);
+    init();
+}
+
+function stopGame() {
+    started = false;
+    clearInterval(interval);   
+    stopBgSound(bgaudio);
+    displayPopUp('REPLAY??');
+}
+
+function finishGame(win) {
+    started = false;
+    stopBgSound(bgaudio);
+    clearInterval(interval);   
+    displayPopUp(win? 'YOU WIN!! ' : 'YOU LOST!!' );
+}
+
+function setTimerTxt(remainTime) {
+    timer.innerHTML = `0:${remainTime}`;
+}
+
+function init() {
+    score = 0;
+    timer.innerHTML = "0:0";
+    playground.innerHTML = '';
+    alert.classList.add('alert--none');  
+    addItems('carrot', IMG_COUNT, 'img/carrot.png');// 당근 추가
+    addItems('bug', IMG_COUNT, 'img/bug.png');// 벌레 추가
+}
 
 function addItems(item, cnt, img) {
-   
     let playgroundRect = playground.getBoundingClientRect();
     let x1 = 0;
     let y1 = 0;
@@ -41,55 +125,6 @@ function getRandomNumber(min, max) {
    return Math.floor(Math.random() * (max - min)) + min;
 }
 
-playground.addEventListener('click', (e) => {
-    let class_name = e.target.className;
-
-    if(class_name == "playground"){
-        return;
-    }
-
-    if(class_name.includes('carrot')){
-        e.target.remove();
-        score++;
-        getCounter(score);
-    }else if(class_name.includes('bug')){
-        stopTimer()
-        displayPopUp('YOU LOST!!');
-    }
-});
-
-alert_btn.addEventListener('click', (e) => {
-    stopTimer();
-    showStopButton();
-    init();
-}) 
-
-
-play_btn.addEventListener('click', () => { 
-    console.log(checked);
-    if(checked){
-        stopGame();
-    }else{
-        init();
-    }  
-});
-
-function init() {
-    checked = true;
-    GAME_TIME = 5;
-    score = 0;
-    timer.innerHTML = "0:0";
-    playground.innerHTML = '';
-    alert.classList.add('alert--none');  
-    
-    addItems('carrot', IMG_COUNT, 'img/carrot.png');// 당근 추가
-    addItems('bug', IMG_COUNT, 'img/bug.png');// 벌레 추가
-    
-    stopTimer();
-    showStopButton();
-    interval = setInterval(() => {setTimer();}, 1000);
-}
-
 function showPlayButton() {
     let icon = play_btn.querySelector('.fas'); 
     icon.classList.add('fa-play');
@@ -101,26 +136,6 @@ function showStopButton() {
     icon.classList.add('fa-stop');
 }
 
-function setTimer() {
-    if(GAME_TIME > 0){
-         GAME_TIME--;
-         timer.innerHTML = `0:${GAME_TIME}`;
-     }else if(GAME_TIME == 0){
-         displayPopUp('YOU LOST!!');
-     } 
- }
-
-function stopTimer() {
-    clearInterval(interval);   
-}
-
-function stopGame() {
-    checked = false;
-    showPlayButton();
-    stopTimer()
-    displayPopUp('REPLAY??');
-}
-
 function displayPopUp(txt) {
     alert.classList.remove('alert--none');
     alert_txt.innerHTML = txt;
@@ -129,7 +144,14 @@ function displayPopUp(txt) {
 function getCounter(cnt) {
     counter.innerHTML = IMG_COUNT - cnt;
     if(IMG_COUNT === cnt ){
-        stopTimer();
-        displayPopUp('YOU WIN!!');
+        winSound.play();
+        finishGame(true);
     }
+}
+
+function stopBgSound(sound) {
+    sound.pause();  
+}
+function startSound(sound) {
+    sound.play();
 }
