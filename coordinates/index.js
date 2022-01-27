@@ -2,8 +2,8 @@ let ver = document.querySelector('.ver');
 let hor = document.querySelector('.hor');
 let target = document.querySelector('.target');
 let tag = document.querySelector('.tag');
-let targetHalWidth = target.getBoundingClientRect().width / 2; 
-let targetHalHeight = target.getBoundingClientRect().height / 2; 
+let targetHalWidth = target.getBoundingClientRect().width; 
+let targetHalHeight = target.getBoundingClientRect().height; 
 
 window.addEventListener("mousemove", (e) => {
     ver.style.transform = `translateX(${e.clientX}px)`;
